@@ -1,30 +1,18 @@
-// CategoryList.js
+// CategoryList.jsx
 import React from 'react';
 import './CategoryList.css'; // Import the CSS file
 
-function CategoryList({ categories, user, onSaveSalesPitch }) {
-  const handleSalesPitch = (category) => {
-    const pitch = prompt(`Enter sales pitch for ${category}:`);
-    if (pitch !== null) {
-      onSaveSalesPitch(category, pitch);
-    }
-  };
-
+function CategoryList({ categories, user, onEditButtonClick }) {
   return (
     <div>
       <h2>Categories</h2>
       <div className="container">
         {categories.map(category => (
           <div key={category} className="category">
-            <strong>{category}</strong>: {user.salesPitches[category]}
-            <button onClick={() => handleSalesPitch(category)}>
+            <strong>{category}</strong>: {user.salesPitches[category.toLowerCase()]}
+            <button onClick={() => onEditButtonClick(category.toLowerCase())}>
               Edit Pitch
             </button>
-            <input
-              type="text"
-              value={user.salesPitches[category]}
-              onChange={(e) => onSaveSalesPitch(category, e.target.value)}
-            />
           </div>
         ))}
       </div>
