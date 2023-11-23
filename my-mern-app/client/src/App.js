@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import CategoryList from './CategoryList';
-import SalesPitchForm from './SalesPitchForm';
 
 function App() {
   const categories = ['Vl', 'Hsi', 'Bts', 'Acc'];
