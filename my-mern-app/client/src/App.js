@@ -1,25 +1,40 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CategoryList from './CategoryList';
+import SalesPitchForm from './SalesPitchForm';
 
 function App() {
+  const categories = ['Vl', 'Hsi', 'Bts', 'Acc'];
+
+  const [user, setUser] = useState({
+    name: '',
+    salesPitches: {
+      vl: '',
+      hsi: '',
+      bts: '',
+      acc: ''
+    },
+  });
+
+  const saveSalesPitch = (category, pitch) => {
+    // update the user's pitches
+    setUser(prevUser => ({
+      ...prevUser,
+      salesPitches: {
+        ...prevUser.salesPitches,
+        [category]: pitch,
+      },
+    }));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <header className="App-header">
+      <h1>Personalized Sales Pitch App</h1>
+      <CategoryList categories={categories} user={user} onSaveSalesPitch={saveSalesPitch} />
+      <SalesPitchForm categories={categories} user={user} onSaveSalesPitch={saveSalesPitch} />
+    </header>
+  </div>
   );
 }
-
-export default App;
