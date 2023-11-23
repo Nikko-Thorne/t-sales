@@ -1,0 +1,8 @@
+/* CategoryList.css */
+.container {
+  display: flex;
+}
+
+.category {
+  margin: 0 10px;
+}

@@ -30,10 +30,11 @@ function App() {
   return (
     <div className="App">
     <header className="App-header">
-      <h1>Personalized Sales Pitch App</h1>
+      <h1>T Sales</h1>
       <CategoryList categories={categories} user={user} onSaveSalesPitch={saveSalesPitch} />
-      <SalesPitchForm categories={categories} user={user} onSaveSalesPitch={saveSalesPitch} />
     </header>
   </div>
   );
 }
+
+export default App;
