@@ -60,3 +60,8 @@ h1 {
   padding: 0 10px; /* Add some padding on the sides */
   box-sizing: border-box; /* Include padding in the width calculation */
 }
+
+/* Styles for section containing saved pitches */
+.saved-pitches {
+  margin-top: 20px; /* Add some space above the section */
+}

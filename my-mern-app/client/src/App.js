@@ -58,17 +58,25 @@ function App() {
           user={user}
           onEditButtonClick={handleEditButtonClick}
         />
-        
-        {/* Displaying the sales pitches */}
-        <div className="pitches-container">
-          {categories.map((category) => (
-            <div className="pitch-column" key={category}>
-              <h3>{category} Sales Pitch:</h3>
-              <p>{user.salesPitches[category.toLowerCase()]}</p>
-            </div>
-          ))}
-        </div>
 
+        {/* This section is for displaying the saved pitches */}
+        <section className="saved-pitches">
+          <h2>Saved Pitches</h2>
+          <div className="pitches-container">
+            {categories.map((category) => (
+              <div className="pitch-column" key={category}>
+                {/* Only display saved pitch if it's not empty */}
+                {user.salesPitches[category.toLowerCase()] && (
+                  <>
+                    <h3>{category} Sales Pitch:</h3>
+                    <p>{user.salesPitches[category.toLowerCase()]}</p>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+ 
         {showModal && (
           <EditPitchModal
             category={currentCategory}

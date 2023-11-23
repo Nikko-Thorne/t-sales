@@ -9,7 +9,7 @@ function CategoryList({ categories, user, onEditButtonClick }) {
       <div className="container">
         {categories.map(category => (
           <div key={category} className="category">
-            <strong>{category}</strong>: {user.salesPitches[category.toLowerCase()]}
+            <strong>{category}</strong>
             <button onClick={() => onEditButtonClick(category.toLowerCase())}>
               Edit Pitch
             </button>
