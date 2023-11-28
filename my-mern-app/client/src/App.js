@@ -5,7 +5,21 @@ import CategoryList from './CategoryList';
 import EditPitchModal from './EditPitchModal';
 
 function App() {
-  const categories = ['Vl', 'Hsi', 'Bts', 'Acc'];
+  //Discovery 
+  const [discovery, setDiscovery] = useState({
+    voiceLine: '',
+    highSpeedInternet: '',
+    phone: '',
+    smartWatch: '',
+    tablet: '',
+    mobileHotspot: '',
+    trackers: '',
+    accessories: '',
+  }
+  );
+  
+  //Categories
+  const categories = ['vl', 'hsi', 'bts', 'acc'];
 
   const [user, setUser] = useState({
     name: '',
@@ -20,7 +34,7 @@ function App() {
   // States to manage the current sales pitch to be edited
   const [currentPitch, setCurrentPitch] = useState('');
   const [currentCategory, setCurrentCategory] = useState('');
-  // State to manage whether the edit modal is visible
+  // State to manage whether the edit modal is visiblea
   const [showModal, setShowModal] = useState(false);
 
   // Function to handle updating the sales pitch
@@ -61,7 +75,7 @@ function App() {
 
         {/* This section is for displaying the saved pitches */}
         <section className="saved-pitches">
-          <h2>Saved Pitches</h2>
+          <h2>Pitches</h2>
           <div className="pitches-container">
             {categories.map((category) => (
               <div className="pitch-column" key={category}>
