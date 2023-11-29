@@ -1,72 +1,30 @@
 // App.js
 import React, { useState } from 'react';
 import './App.css';
-import DiscoveryItem from './DiscoveryItem';
-import CategoryList from './CategoryList';
-import EditPitchModal from './EditPitchModal';
+import DiscoveryItems from './DiscoveryItems';
 
 function App() {
-  //Discovery 
   const [discovery, setDiscovery] = useState({
-    voiceLine: false,
-    highSpeedinternet: false,
-    bts: false,
-    smartWatch: false,
+    phone: false,
+    home: false,
+    hotspot: false,
+    smart_watch: false,
     tablet: false,
-    mobileHotSpot: false,
-    trackers: false,
-    acc: false,
+    wearable_tracker: false,
   });
+  
 
   const toggleDiscoveryItem = (itemName) => {
+    console.log('Current State:', discovery);
     setDiscovery((prevDiscovery) => ({
       ...prevDiscovery,
       [itemName]: !prevDiscovery[itemName],
     }));
+    console.log('Updated State:', discovery);
   };
+  
 
-  //Categories
-  const categories = ['vl', 'hsi', 'bts', 'acc'];
-
-  const [user, setUser] = useState({
-    name: '',
-    salesPitches: {
-      vl: '',
-      hsi: '',
-      bts: '',
-      acc: '',
-    },
-  });
-
-  // States to manage the current sales pitch to be edited
-  const [currentPitch, setCurrentPitch] = useState('');
-  const [currentCategory, setCurrentCategory] = useState('');
-  // State to manage whether the edit modal is visiblea
-  const [showModal, setShowModal] = useState(false);
-
-  // Function to handle updating the sales pitch
-  const saveSalesPitch = (category, pitch) => {
-    setUser(prevUser => ({
-      ...prevUser,
-      salesPitches: {
-        ...prevUser.salesPitches,
-        [category]: pitch,
-      },
-    }));
-  };
-
-  // Function to initiate editing a pitch
-  const handleEditButtonClick = (category) => {
-    setCurrentCategory(category);
-    setCurrentPitch(user.salesPitches[category]);
-    setShowModal(true); // Show the modal
-  };
-
-  // Extended saveSalesPitch function that also hides the modal
-  const extendedSaveSalesPitch = (category, pitch) => {
-    saveSalesPitch(category, pitch);
-    setShowModal(false); // Hide the modal
-  };
+  const categories = ['phone', 'home', 'hotspot', 'smart_watch', 'tablet', 'wearable_tracker'];
 
   return (
     <div className="App">
@@ -76,48 +34,16 @@ function App() {
       <main className="App-body">
         <h2>Discovery</h2>
         <div className="discovery-section">
-          {Object.keys(discovery).map((item) => (
-            <DiscoveryItem
+          {categories.map((item) => (
+            <DiscoveryItems
               key={item}
               itemName={item}
               isSelected={discovery[item]}
               onToggle={toggleDiscoveryItem}
+              image={`${item}.svg`}
             />
           ))}
         </div>
-
-        <CategoryList
-          categories={categories}
-          user={user}
-          onEditButtonClick={handleEditButtonClick}
-        />
-
-        {/* This section is for displaying the saved pitches */}
-        <section className="saved-pitches">
-          <h2>Pitches</h2>
-          <div className="pitches-container">
-            {categories.map((category) => (
-              <div className="pitch-column" key={category}>
-                {/* Only display saved pitch if it's not empty */}
-                {user.salesPitches[category.toLowerCase()] && (
-                  <>
-                    <h3>{category} Sales Pitch:</h3>
-                    <p>{user.salesPitches[category.toLowerCase()]}</p>
-                  </>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
- 
-        {showModal && (
-          <EditPitchModal
-            category={currentCategory}
-            pitch={currentPitch}
-            onSave={extendedSaveSalesPitch}
-            onClose={() => setShowModal(false)}
-          />
-        )}
       </main>
     </div>
   );
