@@ -1,0 +1,13 @@
+.discovery-item {
+    cursor: pointer;
+    margin: 10px;
+}
+
+.discovery-item.selected {
+    border: 2px magenta solid;
+}
+
+img {
+    width: 100px;
+    height: auto;
+}

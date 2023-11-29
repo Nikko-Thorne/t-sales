@@ -1,7 +1,7 @@
 //discoveryItems.jsx
 import React from 'react';
 import PropTypes from 'prop-types';
-import 'discoveryItems.css';
+import 'DiscoveryItems.css';
 
 const DiscoveryItems = ({ itemName, isSelected, onToggle}) => {
     return (

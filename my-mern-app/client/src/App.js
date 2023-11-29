@@ -1,10 +1,30 @@
 // App.js
 import React, { useState } from 'react';
 import './App.css';
+import DiscoveryItem from './DiscoveryItem';
 import CategoryList from './CategoryList';
 import EditPitchModal from './EditPitchModal';
 
 function App() {
+  //Discovery 
+  const [discovery, setDiscovery] = useState({
+    voiceLine: false,
+    highSpeedinternet: false,
+    bts: false,
+    smartWatch: false,
+    tablet: false,
+    mobileHotSpot: false,
+    trackers: false,
+    acc: false,
+  });
+
+  const toggleDiscoveryItem = (itemName) => {
+    setDiscovery((prevDiscovery) => ({
+      ...prevDiscovery,
+      [itemName]: !prevDiscovery[itemName],
+    }));
+  };
+
   //Categories
   const categories = ['vl', 'hsi', 'bts', 'acc'];
 
@@ -54,6 +74,18 @@ function App() {
         <h1>T Sales</h1>
       </header>
       <main className="App-body">
+        <h2>Discovery</h2>
+        <div className="discovery-section">
+          {Object.keys(discovery).map((item) => (
+            <DiscoveryItem
+              key={item}
+              itemName={item}
+              isSelected={discovery[item]}
+              onToggle={toggleDiscoveryItem}
+            />
+          ))}
+        </div>
+
         <CategoryList
           categories={categories}
           user={user}
