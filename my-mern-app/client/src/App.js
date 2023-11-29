@@ -5,19 +5,6 @@ import CategoryList from './CategoryList';
 import EditPitchModal from './EditPitchModal';
 
 function App() {
-  //Discovery 
-  const [discovery, setDiscovery] = useState({
-    voiceLine: '',
-    highSpeedInternet: '',
-    phone: '',
-    smartWatch: '',
-    tablet: '',
-    mobileHotspot: '',
-    trackers: '',
-    accessories: '',
-  }
-  );
-  
   //Categories
   const categories = ['vl', 'hsi', 'bts', 'acc'];
 
