@@ -25,6 +25,16 @@ function App() {
     console.log('Updated State:', discovery);
   };
   
+  const resetDiscoveryHighlights = () => {
+    setDiscovery({
+      phone: false,
+      home: false,
+      hotspot: false,
+      smart_watch: false,
+      tablet: false,
+      wearable_tracker: false,
+    });
+  };
 
   const categories = ['phone', 'home', 'hotspot', 'smart_watch', 'tablet', 'wearable_tracker'];
 
@@ -76,7 +86,7 @@ function App() {
         <h1>T Sales</h1>
       </header>
       <main className="App-body">
-        <h2>Discovery</h2>
+      <h2 onClick={resetDiscoveryHighlights} style={{ cursor: 'pointer' }}>Discovery</h2>
         <div className="discovery-section">
           {categories.map((item) => (
             <DiscoveryItems
