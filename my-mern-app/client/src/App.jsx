@@ -52,7 +52,7 @@ function App() {
       ...prevUser,
       salesPitches: {
         ...prevUser.salesPitches,
-        [category]: pitch,
+        [category.toUpperCase()]: pitch,
       },
     }));
   };
@@ -89,48 +89,32 @@ function App() {
             />
           ))}
         </div>
-        <div className="sales-pitch-section">
         <div className="saved-pitches-container">
-    {pitch_categories.map(category => (
-      <div key={category} className={category}>
-        <CategoryList
-          categories={[category]}
-          user={user}
-          onEditButtonClick={handleEditButtonClick}
-        />
-    
-      </div>
+        {pitch_categories.map((pitch_category) => (
+          <div key={pitch_category} className={`category-container ${pitch_category.toLowerCase()}`}>
+            <div className="category-header">
+              <span className="category-title">{pitch_category}</span>
+              <button className="edit-button" onClick={() => handleEditButtonClick(pitch_category)}>Edit</button>
+            </div>
+            <div className="saved-pitch">
+  {user.salesPitches[pitch_category.toUpperCase()] && (
+    <p>{user.salesPitches[pitch_category.toUpperCase()]}</p>
+  )}
+</div>
+          </div>
         ))}
       </div>
-        {/* This section is for displaying the saved pitches */}
-        <section className="saved-pitches">
-          <h2>Saved Pitches</h2>
-          <div className="pitches-container">
-  {pitch_categories.map((pitch_category) => (
-    <div className={`pitch-column ${pitch_category.toLowerCase()}-column`} key={pitch_category}>
-      {/* Only display saved pitch if it's not empty */}
-      {user.salesPitches[pitch_category.toLowerCase()] && (
-        <div className={`pitch-content ${pitch_category.toLowerCase()}-content`}>
-          <h3 className={`pitch-title ${pitch_category.toLowerCase()}-title`}>{pitch_category} Sales Pitch:</h3>
-          <p className={`pitch-text ${pitch_category.toLowerCase()}-text`}>{user.salesPitches[pitch_category.toLowerCase()]}</p>
-        </div>
+      {showModal && (
+        <EditPitchModal
+          category={currentCategory}
+          pitch={currentPitch}
+          onSave={extendedSaveSalesPitch}
+          onClose={() => setShowModal(false)}
+        />
       )}
-    </div>
-  ))}
-</div>
-        </section>
-        </div>
-        {showModal && (
-          <EditPitchModal
-            category={currentCategory}
-            pitch={currentPitch}
-            onSave={extendedSaveSalesPitch}
-            onClose={() => setShowModal(false)}
-          />
-        )}
-      </main>
-    </div>
-  );
+    </main>
+  </div>
+);
 }
 
 export default App;
