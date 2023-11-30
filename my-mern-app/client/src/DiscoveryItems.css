@@ -1,14 +1,14 @@
 .discovery-item {
-    cursor: pointer;
-    margin: 10px;
+  cursor: pointer;
+  margin: 10px;
 }
 
 .discovery-item.selected {
-    background-color: magenta;
-    border-radius: 15px;
+  background-color: magenta;
+  border-radius: 15px;
 }
 
 img {
-    width: 100px;
-    height: auto;
+  width: 100px;
+  height: auto;
 }

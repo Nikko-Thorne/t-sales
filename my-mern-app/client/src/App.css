@@ -14,13 +14,13 @@
 }
 
 .App-header {
-  background-color: #282c34; /* Choose a banner background color */
+  background-color: #282c34;
   color: white;
-  padding: 10px 20px; /* Add some padding */
-  display: flex; /* Use flexbox to adjust title position */
-  align-items: center; /* Vertically align content */
-  justify-content: flex-start; /* Align content to the left */
-  width: 100%; /* Make sure it spans the full width of the page */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
 }
 
 .App-body {
@@ -28,7 +28,7 @@
 }
 
 h1 {
-  margin: 0; /* Eliminate default margin of h1 to align it to the very top and left */
+  margin: 0;
 }
 
 .App-link {
@@ -49,24 +49,24 @@ h1 {
 }
 
 .discovery-section {
-  display: flex;  
-  justify-content: center; 
-  gap: 10px; 
-  padding: 20px; 
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
 }
 
 .discovery-item {
   cursor: pointer;
-  flex: 0 0 auto; 
-  margin: 10px; 
- 
+  flex: 0 0 auto;
+  margin: 10px;
 }
 
 .saved-pitches-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px; /* You can adjust the space between the items */
+  align-items: center;
   justify-content: center;
+  justify-self: center;
+  gap: 20px;
 }
 
 .sales-pitch-section {
@@ -77,10 +77,10 @@ h1 {
 }
 
 .category-container {
-  flex: 0 1 22%; /* Adjust the width as needed for your design */
+  flex: 0 1 22%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Align items in a column */
+  align-items: center;
 }
 
 .category-header {
@@ -90,8 +90,6 @@ h1 {
   margin-bottom: 10px;
 }
 
-
 .saved-pitch {
   width: 100%;
-  /* Style for saved pitch content */
 }

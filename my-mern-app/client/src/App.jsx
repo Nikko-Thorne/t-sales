@@ -1,8 +1,8 @@
 // App.js
-import React, { useState } from 'react';
-import './App.css';
-import DiscoveryItems from './DiscoveryItems';
-import EditPitchModal from './EditPitchModal';
+import React, { useState } from "react";
+import "./App.css";
+import DiscoveryItems from "./DiscoveryItems";
+import EditPitchModal from "./EditPitchModal";
 
 function App() {
   const [discovery, setDiscovery] = useState({
@@ -15,14 +15,14 @@ function App() {
   });
 
   const toggleDiscoveryItem = (itemName) => {
-    console.log('Current State:', discovery);
+    console.log("Current State:", discovery);
     setDiscovery((prevDiscovery) => ({
       ...prevDiscovery,
       [itemName]: !prevDiscovery[itemName],
     }));
-    console.log('Updated State:', discovery);
+    console.log("Updated State:", discovery);
   };
-  
+
   const resetDiscoveryHighlights = () => {
     setDiscovery({
       phone: false,
@@ -34,29 +34,36 @@ function App() {
     });
   };
 
-  const categories = ['phone', 'home', 'hotspot', 'smart_watch', 'tablet', 'wearable_tracker'];
+  const categories = [
+    "phone",
+    "home",
+    "hotspot",
+    "smart_watch",
+    "tablet",
+    "wearable_tracker",
+  ];
 
-  const pitch_categories = ['Vl', 'Hsi', 'Bts', 'Acc'];
+  const pitch_categories = ["Vl", "Hsi", "Bts", "Acc"];
 
   const [user, setUser] = useState({
-    name: '',
+    name: "",
     salesPitches: {
-      Vl: '',
-      Hsi: '',
-      Bts: '',
-      Acc: '',
+      Vl: "",
+      Hsi: "",
+      Bts: "",
+      Acc: "",
     },
   });
 
   // States to manage the current sales pitch to be edited
-  const [currentPitch, setCurrentPitch] = useState('');
-  const [currentCategory, setCurrentCategory] = useState('');
+  const [currentPitch, setCurrentPitch] = useState("");
+  const [currentCategory, setCurrentCategory] = useState("");
   // State to manage whether the edit modal is visible
   const [showModal, setShowModal] = useState(false);
 
   // Function to handle updating the sales pitch
   const saveSalesPitch = (category, pitch) => {
-    setUser(prevUser => ({
+    setUser((prevUser) => ({
       ...prevUser,
       salesPitches: {
         ...prevUser.salesPitches,
@@ -84,7 +91,9 @@ function App() {
         <h1>T Sales</h1>
       </header>
       <main className="App-body">
-      <h2 onClick={resetDiscoveryHighlights} style={{ cursor: 'pointer' }}>Discovery</h2>
+        <h2 onClick={resetDiscoveryHighlights} style={{ cursor: "pointer" }}>
+          Discovery
+        </h2>
         <div className="discovery-section">
           {categories.map((item) => (
             <DiscoveryItems
@@ -98,31 +107,43 @@ function App() {
           ))}
         </div>
         <div className="saved-pitches-container">
-        {pitch_categories.map((pitch_category) => (
-          <div key={pitch_category} className={`category-container ${pitch_category.toLowerCase()}`}>
-            <div className="category-header">
-              <span className="category-title">{pitch_category}</span>
-              <button className="edit-button" onClick={() => handleEditButtonClick(pitch_category)}>Edit</button>
+          {pitch_categories.map((pitch_category) => (
+            <div
+              key={pitch_category}
+              className={`category-container ${pitch_category.toLowerCase()}`}
+            >
+              <div className="category-header">
+                <span className="category-title">{pitch_category}</span>
+              </div>
+
+              {/* Saved pitch section moved above */}
+              <div className="saved-pitch">
+                {user.salesPitches[pitch_category.toUpperCase()] && (
+                  <p>{user.salesPitches[pitch_category.toUpperCase()]}</p>
+                )}
+              </div>
+
+              {/* Edit button moved below the "Saved Pitch" section */}
+              <button
+                className="edit-button"
+                onClick={() => handleEditButtonClick(pitch_category)}
+              >
+                Edit
+              </button>
             </div>
-            <div className="saved-pitch">
-  {user.salesPitches[pitch_category.toUpperCase()] && (
-    <p>{user.salesPitches[pitch_category.toUpperCase()]}</p>
-  )}
-</div>
-          </div>
-        ))}
-      </div>
-      {showModal && (
-        <EditPitchModal
-          category={currentCategory}
-          pitch={currentPitch}
-          onSave={extendedSaveSalesPitch}
-          onClose={() => setShowModal(false)}
-        />
-      )}
-    </main>
-  </div>
-);
+          ))}
+        </div>
+        {showModal && (
+          <EditPitchModal
+            category={currentCategory}
+            pitch={currentPitch}
+            onSave={extendedSaveSalesPitch}
+            onClose={() => setShowModal(false)}
+          />
+        )}
+      </main>
+    </div>
+  );
 }
 
 export default App;

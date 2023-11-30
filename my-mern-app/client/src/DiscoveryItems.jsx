@@ -1,12 +1,12 @@
 // DiscoveryItems.jsx
-import React from 'react';
-import PropTypes from 'prop-types';
-import './DiscoveryItems.css';
+import React from "react";
+import PropTypes from "prop-types";
+import "./DiscoveryItems.css";
 
 const DiscoveryItems = ({ itemName, isSelected, onToggle, image }) => {
   return (
     <div
-      className={`discovery-item ${isSelected ? 'selected' : ''}`}
+      className={`discovery-item ${isSelected ? "selected" : ""}`}
       onClick={() => onToggle(itemName)}
     >
       {/* Use the image prop to dynamically set the src attribute */}
