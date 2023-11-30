@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import './App.css';
 import DiscoveryItems from './DiscoveryItems';
-import CategoryList from './CategoryList';
 import EditPitchModal from './EditPitchModal';
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
     tablet: false,
     wearable_tracker: false,
   });
-  
 
   const toggleDiscoveryItem = (itemName) => {
     console.log('Current State:', discovery);
