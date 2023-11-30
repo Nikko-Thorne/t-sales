@@ -48,7 +48,22 @@ h1 {
   text-align: center;
 }
 
-/* Styles for pitch columns */
+.discovery-section {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 10px; 
+  padding: 20px; 
+}
+
+.discovery-item {
+  cursor: pointer;
+  flex: 0 0 auto; 
+  margin: 10px; 
+ 
+}
+
+
 .pitches-container {
   display: flex; /* Enable Flexbox layout */
   justify-content: space-between; /* Space out columns evenly */
