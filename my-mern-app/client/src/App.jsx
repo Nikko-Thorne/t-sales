@@ -85,31 +85,39 @@ function App() {
               isSelected={discovery[item]}
               onToggle={toggleDiscoveryItem}
               image={`${item}.svg`}
+              className={`discovery-item ${item}`}
             />
           ))}
         </div>
         <div className="sales-pitch-section">
-          <CategoryList
-          categories={pitch_categories}
+        <div className="saved-pitches-container">
+    {pitch_categories.map(category => (
+      <div key={category} className={category}>
+        <CategoryList
+          categories={[category]}
           user={user}
           onEditButtonClick={handleEditButtonClick}
         />
+    
+      </div>
+        ))}
+      </div>
         {/* This section is for displaying the saved pitches */}
         <section className="saved-pitches">
           <h2>Saved Pitches</h2>
           <div className="pitches-container">
-            {pitch_categories.map((pitch_categories) => (
-              <div className="pitch-column" key={pitch_categories}>
-                {/* Only display saved pitch if it's not empty */}
-                {user.salesPitches[pitch_categories.toLowerCase()] && (
-                  <>
-                    <h3>{pitch_categories} Sales Pitch:</h3>
-                    <p>{user.salesPitches[pitch_categories.toLowerCase()]}</p>
-                  </>
-                )}
-            </div>
-            ))}
-          </div>
+  {pitch_categories.map((pitch_category) => (
+    <div className={`pitch-column ${pitch_category.toLowerCase()}-column`} key={pitch_category}>
+      {/* Only display saved pitch if it's not empty */}
+      {user.salesPitches[pitch_category.toLowerCase()] && (
+        <div className={`pitch-content ${pitch_category.toLowerCase()}-content`}>
+          <h3 className={`pitch-title ${pitch_category.toLowerCase()}-title`}>{pitch_category} Sales Pitch:</h3>
+          <p className={`pitch-text ${pitch_category.toLowerCase()}-text`}>{user.salesPitches[pitch_category.toLowerCase()]}</p>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
         </section>
         </div>
         {showModal && (
