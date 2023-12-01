@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import DiscoveryItems from "./DiscoveryItems";
 import EditPitchModal from "./EditPitchModal";
@@ -42,37 +42,67 @@ function App() {
 
   const pitch_categories = ["Vl", "Hsi", "Bts", "Acc"];
 
-  const [user, setUser] = useState({
-    name: "",
-    salesPitches: {
-      Vl: "",
-      Hsi: "",
-      Bts: "",
-      Acc: "",
-    },
+  const [salesPitches, setSalesPitches] = useState({
+    Vl: "",
+    Hsi: "",
+    Bts: "",
+    Acc: "",
   });
 
   const [currentPitch, setCurrentPitch] = useState("");
   const [currentCategory, setCurrentCategory] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const saveSalesPitch = (category, pitch) => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      salesPitches: { ...prevUser.salesPitches, [category]: pitch },
-    }));
-  };
-
   const handleEditButtonClick = (pitch_category) => {
     setCurrentCategory(pitch_category);
-    setCurrentPitch(user.salesPitches[pitch_category]);
+    setCurrentPitch(salesPitches[pitch_category]);
     setShowModal(true);
   };
 
-  const extendedSaveSalesPitch = (pitch_category, pitch) => {
-    saveSalesPitch(pitch_category, pitch);
+  const saveSalesPitch = (category, pitch) => {
+    const upperCaseCategory = category.toUpperCase();
+    setSalesPitches((prevPitches) => ({
+      ...prevPitches,
+      [upperCaseCategory]: pitch,
+    }));
+  };
+
+  const extendedSaveSalesPitch = (category, pitch) => {
+    saveSalesPitch(category, pitch);
     setShowModal(false);
   };
+
+  useEffect(() => {
+    const savedPitches = localStorage.getItem("salesPitches");
+    try {
+      // Try parsing the JSON string
+      if (savedPitches) {
+        setSalesPitches(JSON.parse(savedPitches));
+      } else {
+        // If there's no data, set default values
+        setSalesPitches({
+          Vl: "",
+          Hsi: "",
+          Bts: "",
+          Acc: "",
+        });
+      }
+    } catch (error) {
+      // If parsing fails, handle the error (e.g., log it)
+      console.error("Error parsing JSON:", error);
+      // Set default values
+      setSalesPitches({
+        Vl: "",
+        Hsi: "",
+        Bts: "",
+        Acc: "",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("salesPitches", JSON.stringify(salesPitches));
+  }, [salesPitches]);
 
   return (
     <div className="App">
@@ -108,8 +138,8 @@ function App() {
                 </div>
 
                 <div className="saved-pitch">
-                  {user.salesPitches[pitch_category] && (
-                    <p>{user.salesPitches[pitch_category]}</p>
+                  {salesPitches[pitch_category.toUpperCase()] && (
+                    <p>{salesPitches[pitch_category.toUpperCase()]}</p>
                   )}
                 </div>
 
