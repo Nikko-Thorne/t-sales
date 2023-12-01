@@ -42,12 +42,10 @@ function App() {
 
   const pitch_categories = ["Vl", "Hsi", "Bts", "Acc"];
 
-  const [salesPitches, setSalesPitches] = useState({
-    Vl: "",
-    Hsi: "",
-    Bts: "",
-    Acc: "",
-  });
+  const [localPitchesValue] = useState(localStorage.getItem("salesPitches"));
+  const [salesPitches, setSalesPitches] = useState(
+    localPitchesValue ? JSON.parse(localPitchesValue) : []
+  );
 
   const [currentPitch, setCurrentPitch] = useState("");
   const [currentCategory, setCurrentCategory] = useState("");
@@ -71,34 +69,6 @@ function App() {
     saveSalesPitch(category, pitch);
     setShowModal(false);
   };
-
-  useEffect(() => {
-    const savedPitches = localStorage.getItem("salesPitches");
-    try {
-      // Try parsing the JSON string
-      if (savedPitches) {
-        setSalesPitches(JSON.parse(savedPitches));
-      } else {
-        // If there's no data, set default values
-        setSalesPitches({
-          Vl: "",
-          Hsi: "",
-          Bts: "",
-          Acc: "",
-        });
-      }
-    } catch (error) {
-      // If parsing fails, handle the error (e.g., log it)
-      console.error("Error parsing JSON:", error);
-      // Set default values
-      setSalesPitches({
-        Vl: "",
-        Hsi: "",
-        Bts: "",
-        Acc: "",
-      });
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem("salesPitches", JSON.stringify(salesPitches));
@@ -137,9 +107,12 @@ function App() {
                   <span className="category-title">{pitch_category}</span>
                 </div>
 
+                {/* Always render the container, but conditionally render pitch content */}
                 <div className="saved-pitch">
-                  {salesPitches[pitch_category.toUpperCase()] && (
+                  {salesPitches[pitch_category.toUpperCase()] ? (
                     <p>{salesPitches[pitch_category.toUpperCase()]}</p>
+                  ) : (
+                    <p>No pitch available.</p> // Or any placeholder text you want to show
                   )}
                 </div>
 
