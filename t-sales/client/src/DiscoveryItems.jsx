@@ -10,7 +10,7 @@ const DiscoveryItems = ({ itemName, isSelected, onToggle, image }) => {
       onClick={() => onToggle(itemName)}
     >
       {/* Use the image prop to dynamically set the src attribute */}
-      <img src={`/${image}`} alt={itemName} />
+      <img className="discovery-image" src={`/${image}`} alt={itemName} />
     </div>
   );
 };
